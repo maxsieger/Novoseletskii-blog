@@ -2,16 +2,21 @@
 {% block content %}
     <section class="first-block">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavAltMarkup"
-                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('render') }}">Главная</a>
-                    <a class="nav-link {% if request.path == '/contacts/' %}active{% endif %}" href="{{ url_for('render', name='contacts') }}">Контакты</a>
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup"
+                        aria-controls="navbarNavAltMarkup"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link" href="/">Главная</a>
+                        <a class="nav-link" href="/contacts/">Контакты</a>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -34,30 +39,97 @@
     <div class="bg-light">
         <div class="container py-5">
             <h2 class="blog-heading">Мой блог:</h2>
-            <div class="recipe-block row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+            <div class="recipe-block">
                 {% for post in posts %}
-                <a class="link-card" href="{{ url_for('view_post', post_id=post.id) }}"><div class="blog-card col">
-                    <div class="recipe-card"></div>
-                    {% if post.image %}
-                        <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post['title'] }}"
-                            class="recipe-img">
-                    {% else %}
-                    <div class="no-image-placeholder">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    {% endif %}
-                    <div class="featured-content">
-                        <span class="recipe-heading">{{ post['title'] }}</span>
-                        <p class="recipe-text">{{ post['content'] | truncate(300) }}</p>
-                    </div>
-                </div></a>
+                <div class="col">
+                    <a class="link-card" href="{{ url_for('view_post', post_id=post.id) }}">
+                        <div class="recipe-card">
+                            <div class="image-container-card">
+                                {% if post.image %}
+                                <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post['title'] }}" class="recipe-img">
+                                {% else %}
+                                <div class="no-image-placeholder">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="featured-content">
+                                <span class="recipe-heading">{{ post['title'] }}</span>
+                                <p class="recipe-text">{{ post['content'] | truncate(300) }}</p>
+                                <span class="read-more">Читать далее →</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
             </div>
         </div>
     </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </section>
- <footer>
-
- </footer>
+<div class="container-block">
+    <footer>
+            <div class="footer-wave"></div>
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <h3>Контакты</h3>
+                    <ul class="footer_list">
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span class="footer_text">maximnvs@bk.ru</span>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <a class="footer_link" href="https://t.me/ItsNewmax" target="_blank">@ItsNewmax</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <a class="footer_link" href="https://tenchat.ru/ItsNewmax?utm_source=c1f5ccba-7d26-4055-8279-07f7b187279b" target="_blank">ItsNewmax</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <a class="footer_link" href="#">YouTube: скоро будет :/</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <a class="footer_link" href="https://www.instagram.com/novmaxiz?igsh=cTV5eW9zeHRpMXJs" target="_blank">novmaxiz</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <p>Подписывайтесь на мои соцсети, чтобы быть в курсе новых проектов и обновлений.</p>
+                    <div class="social-icons">
+                        <a href="https://t.me/ItsNewmax" class="social-icon" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://vk.com/max__new" class="social-icon" target="_blank">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="https://tenchat.ru/ItsNewmax?utm_source=c1f5ccba-7d26-4055-8279-07f7b187279b" class="social-icon" target="_blank">
+                            <i class="fas fa-comment"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Новоселецкий Максим. Все права защищены.</p>
+            </div>
+    </footer>
+</div>
 {% endblock %}

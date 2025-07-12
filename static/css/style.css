@@ -235,7 +235,7 @@
 }
 
 .bg-light {
-    background-color: #f8f9fa !important; /* Светло-серый фон всего блока */
+    background-color: #f8f9fa !important;
 }
 
 .blog-heading {
@@ -253,11 +253,17 @@
     left: 0;
     width: 80px;
     height: 4px;
-    background: linear-gradient(to right, #6c757d, #adb5bd); /* Серый градиент */
+    background: linear-gradient(to right, #6c757d, #adb5bd);
     border-radius: 2px;
 }
 
-/* Стили карточек */
+/* Исправленные стили карточек */
+.recipe-block {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
 .link-card {
     text-decoration: none !important;
     color: inherit;
@@ -271,7 +277,7 @@
 }
 
 .recipe-card {
-    background-color: #e9ecef; /* Серый фон карточки */
+    background: #e9ecef;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -283,7 +289,7 @@
 
 .link-card:hover .recipe-card {
     box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-    background-color: #e9ecef; /* Серый фон карточки */
+    background: #dee2e6;
 }
 
 /* Стили изображения */
@@ -303,7 +309,7 @@
 /* Заглушка для отсутствующего изображения */
 .no-image-placeholder {
     height: 200px;
-    background: #ced4da; /* Серый фон заглушки */
+    background: #ced4da;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -317,7 +323,7 @@
 }
 
 .link-card:hover .no-image-placeholder {
-  background: #adb5bd; /* Темнее при наведении */
+    background: #adb5bd;
 }
 
 .link-card:hover .no-image-placeholder .fas {
@@ -325,7 +331,7 @@
     color: #495057;
 }
 
-/* Стили контента */
+/* Исправленные стили контента */
 .featured-content {
     padding: 20px;
     flex-grow: 1;
@@ -337,30 +343,280 @@
     font-weight: 700;
     font-size: 1.25rem;
     margin-bottom: 12px;
-    color: #343a40; /* Темно-серый цвет */
+    color: #343a40;
     line-height: 1.4;
     transition: color 0.3s ease;
-}
-
-.blog-card {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    transition: transform 0.5s ease;
+    min-height: 3.5em; /* Фиксированная высота для заголовка */
+    display: flex;
+    align-items: center;
 }
 
 .link-card:hover .recipe-heading {
-    color: #212529; /* Чёрный при наведении */
+    color: #212529;
 }
 
 .recipe-text {
-    color: #495057; /* Серый цвет текста */
+    color: #495057;
     font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 0;
     flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Ограничение до 3 строк */
+    -webkit-box-orient: vertical;
+}
+
+
+.container-block {
+    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #fff;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    text-align: center;
+}
+
+footer h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+footer p {
+    font-size: 1.4rem;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    line-height: 1.6;
+}
+
+/* Стили для футера */
+footer {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 60px 20px 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-wave {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="rgba(0,0,0,0.8)"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="rgba(0,0,0,0.8)"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="rgba(0,0,0,0.8)"/></svg>');
+    background-size: cover;
+    background-position: center;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-logo {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-logo h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer-logo p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 300px;
+    color: #ddd;
+}
+
+.footer-contact {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-contact h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-contact h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    border-radius: 3px;
+}
+
+.footer_list {
+    list-style: none;
+}
+
+.footer_item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.3s ease;
+}
+
+.footer_item:hover {
+    transform: translateX(5px);
+}
+
+.footer-icon {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.footer-icon i {
+    color: #fff;
+    font-size: 14px;
+}
+
+.footer_text, .footer_link {
+    color: #ddd;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer_link:hover {
+    color: #ff7e5f;
+    text-decoration: underline;
+}
+
+.footer-social {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-social h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-social h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    border-radius: 3px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+}
+
+.social-icon i {
+    font-size: 20px;
+    color: #fff;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 40px auto 0;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Адаптивность */
+@media (max-width: 900px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-logo, .footer-contact, .footer-social {
+        min-width: 100%;
+    }
+    
+    footer h1 {
+        font-size: 2.5rem;
+    }
+    
+    footer p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .content {
+        padding: 20px;
+    }
+    
+    footer h1 {
+        font-size: 2rem;
+    }
+    
+    footer p {
+        font-size: 1rem;
+    }
+    
+    .footer-wave {
+        top: -50px;
+        height: 70px;
+    }
 }
 
 /* Адаптивность */
@@ -371,45 +627,77 @@
 }
 
 @media (max-width: 992px) {
-    .recipe-block.row-cols-lg-6 > * {
-        flex: 0 0 33.333%;
-        max-width: 33.333%;
+    .recipe-block {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
-    
+
     .recipe-img, .no-image-placeholder {
-        height: 160px;
+        height: 180px;
     }
 }
 
 @media (max-width: 768px) {
-    .recipe-block.row-cols-md-3 > * {
-        flex: 0 0 50%;
-        max-width: 50%;
+    .recipe-block {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
     }
-    
+
     .recipe-heading {
         font-size: 1.15rem;
+        min-height: 3em;
+    }
+
+    .featured-content {
+        padding: 15px;
     }
 }
 
 @media (max-width: 576px) {
-    .recipe-block.row-cols-2 > * {
-        flex: 0 0 100%;
-        max-width: 100%;
+    .recipe-block {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
-    
+
     .recipe-img, .no-image-placeholder {
-        height: 200px;
+        height: 220px;
     }
-    
+
     .blog-heading {
         font-size: 1.8rem;
         text-align: center;
     }
-    
+
     .blog-heading::after {
         left: 50%;
         transform: translateX(-50%);
+    }
+}
+
+/* Контакты */
+@media (max-width: 768px) {
+    .contact-heading {
+        font-size: 40px;
+    }
+    .contact-medium-heading {
+        font-size: 35px;
+    }
+    .contact-text {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-heading {
+        font-size: 32px;
+    }
+    .contact-medium-heading {
+        font-size: 28px;
+    }
+    .contact-text {
+        font-size: 18px;
+    }
+    .img-contact {
+        height: 50px;
     }
 }
 
@@ -484,7 +772,7 @@
 .recipe-card {
     /* border: 3px solid #212529; */
     border-radius: 20px;
-    width: 300px; 
+    width: 300px;
     background-color: rgb(243, 242, 242);
     /* padding: 10px; */
 }
@@ -559,4 +847,123 @@
     width: 634.01px;
     height: 482px;
     background-color: #212529a4;
+}
+
+/* =============== МОБИЛЬНАЯ АДАПТАЦИЯ =============== */
+@media (max-width: 992px) {
+    .about-me-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .about-me-text-container {
+        max-width: 100%;
+    }
+
+    .my-photo {
+        width: 200px;
+        height: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .first-block {
+        height: 600px;
+    }
+
+    .greeting-block {
+        margin-left: 20px;
+        margin-top: 200px;
+    }
+
+    .greeting-heading {
+        font-size: 32px;
+    }
+
+    .greeting-text {
+        font-size: 22px;
+    }
+
+    .contact-container {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .contact-heading {
+        font-size: 40px;
+    }
+
+    .contact-text {
+        font-size: 22px;
+    }
+
+    .contact-medium-heading {
+        font-size: 35px;
+    }
+
+    .blog-heading {
+        font-size: 40px;
+        text-align: center;
+    }
+
+    .post__blocks-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .image-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .back-btn {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand .logo-name {
+        font-size: 16px;
+    }
+
+    .greeting-heading {
+        font-size: 28px;
+    }
+
+    .greeting-text {
+        font-size: 18px;
+    }
+
+    .contact-heading,
+    .contact-medium-heading {
+        font-size: 30px;
+    }
+
+    .contact-text {
+        font-size: 18px;
+    }
+
+    .img-contact {
+        height: 50px;
+    }
+
+    .add_container {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    .add_heading {
+        font-size: 1.8rem;
+    }
+
+    .blog-heading {
+        font-size: 32px;
+    }
+
+    .post-image {
+        max-width: 100%;
+        height: auto;
+    }
 }

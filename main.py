@@ -40,14 +40,6 @@ def render(name=None):
         except Exception as e:
             flash(f'Ошибка при загрузке постов: {str(e)}', 'error')
             return render_template("index.html", page_name='Главная', posts=[])
-    elif name.lower() == 'blog':
-        try:
-            posts = db.get_all_posts()
-            context = {'page_name': 'Блог', 'posts': posts}
-            return render_template("blog.html", **context)
-        except Exception as e:
-            flash(f'Ошибка при загрузке постов: {str(e)}', 'error')
-            return render_template("blog.html", page_name='Блог', posts=[])
     elif name.lower() == 'contacts':
         context['page_name'] = 'Контакты'
         return render_template("contacts.html", **context)

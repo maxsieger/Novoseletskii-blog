@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="contact-block">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Главная</a>
+                    <a class="nav-link {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
+                </div>
+            </div>
+        </nav>
+        <div class="contact-container">
+            <span class="contact-heading">Свяжитесь со мной</span>
+            <p class="contact-text">Я могу сделать вам блог, сайт-визитку или же ленднинг. Или мы можем познакомится и делать совместные проекты!</p>
+            <span class="contact-medium-heading">Контакты:</span>
+            <ul class="contact-list">
+                <a class="contact-link" href="https://vk.com/max__new"><img class="img-contact" src="../static/image/VK.png" alt="VK"></a>
+                <a class="contact-link" href="https://t.me/ItsNewmax"><img class="img-contact" src="../static/image/tg.png" alt="Telegram"></a>
+                <a class="contact-link" href="https://tenchat.ru/MN_Dev"><img class="img-contact" src="../static/image/T_tenchat_red.png" alt="TenChat"></a>
+            </ul>
+        </div>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+{% endblock %}

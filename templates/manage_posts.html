@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+    <style>
+        .post-list { margin: 20px 0; }
+        .post-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .post-actions { margin-top: 10px; }
+        .btn {
+            padding: 5px 10px;
+            margin-right: 5px;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+        .btn-edit { background: #4CAF50; color: white; }
+        .btn-delete { background: #f44336; color: white; }
+    </style>
+
+    <h1>Управление постами</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="post-list">
+        {% for post in posts %}
+        <div class="post-item">
+            <h3>{{ post.title }}</h3>
+            {% if post.image %}
+            <img src="{{ url_for('static', filename=post.image) }}" width="200">
+            {% endif %}
+            <p>{{ post.content|truncate(100) }}</p>
+            <div class="post-actions">
+                <a href="{{ url_for('admin_edit_post', post_id=post.id) }}" class="btn btn-edit">Редактировать</a>
+                <form action="{{ url_for('admin_delete_post', post_id=post.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-delete">Удалить</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p>Нет доступных постов</p>
+        {% endfor %}
+    </div>
+
+{% endblock %}

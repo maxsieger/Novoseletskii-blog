@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="first-block">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('render') }}">Главная</a>
+                    <a class="nav-link {% if request.path == '/contacts/' %}active{% endif %}" href="{{ url_for('render', name='contacts') }}">Контакты</a>
+                </div>
+            </div>
+        </nav>
+        <div class="greeting-block">
+            <p class="greeting-heading"><b>Привет! Меня зовут Максим и мне 14 лет.</b></p>
+            <span class="greeting-text"><b>Я люблю программировать и знаю такие языки как: HTML, CSS, Python, JavaScript.</b></span>
+        </div>
+    </section>
+    <section class="about-me-block">
+        <div class="about-me-container">
+            <img class="my-photo" src="../static/image/is.jpg" alt="">
+            <div class="about-me-text-container">
+                <span class="about-me-heading">Еще раз привет!</span>
+                <p class="about-me-text">Я Frontend-разработчик и начинающий Fulstack-разработчик. Я живу и учусь в Валдае. 
+                    Я могу сделать вам лендинг или сайт-визитку или же блог. Или мы можем вместе разробатовать совместные проекты.</p>
+            </div>
+        </div>
+    </section>
+<section class="blog-block">
+    <div class="bg-light">
+        <div class="container py-5">
+            <h2 class="blog-heading">Мой блог:</h2>
+            <div class="recipe-block row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+                {% for post in posts %}
+                <a class="link-card" href="{{ url_for('view_post', post_id=post.id) }}"><div class="blog-card col">
+                    <div class="recipe-card"></div>
+                    {% if post.image %}
+                        <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post['title'] }}"
+                            class="recipe-img">
+                    {% else %}
+                    <div class="no-image-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    {% endif %}
+                    <div class="featured-content">
+                        <span class="recipe-heading">{{ post['title'] }}</span>
+                        <p class="recipe-text">{{ post['content'] | truncate(300) }}</p>
+                    </div>
+                </div></a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</section>
+ <footer>
+
+ </footer>
+{% endblock %}

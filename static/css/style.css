@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .add_container {
+            margin: 40px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+        }
+        .add_heading {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        .add_heading:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: #3498db;
+            margin: 10px auto;
+            border-radius: 2px;
+        }
+        .form-group {
+            margin-bottom: 25px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        .image-preview {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            border: 2px dashed #ddd;
+            padding: 10px;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .btn i {
+            margin-right: 10px;
+        }
+        .flashes {
+            margin-bottom: 20px;
+        }
+        .flash {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+        .flash.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .flash.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .file-input input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .file-input-label {
+            display: block;
+            padding: 14px;
+            background: #f8f9fa;
+            border: 2px dashed #e1e8ed;
+            border-radius: 8px;
+            text-align: center;
+            color: #6c757d;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .file-input-label:hover {
+            background: #e9ecef;
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+.first-block {
+    background-image: url(../image/bkg-image.png);
+    display: block;
+    height: 780px;
+    margin: 0px;
+    background-size: cover;
+}
+.greeting-block {
+    margin-left: 130px;
+    margin-top: 280px;
+}
+
+.greeting-heading {
+    color: white;
+    font-size: 55px;
+    font-weight: 550;
+    margin-bottom: 0px;
+}
+.greeting-text {
+    color: rgba(255, 255, 255, 0.896);
+    font-size: 35px;
+    font-weight: 525;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.navbar-nav .active {
+    background-color: none;
+    margin: 0;
+}
+.navbar {
+    padding: 15px;
+}
+
+.nav-link, .logo-name{
+    color: black;
+    opacity: 80%;
+}
+
+.navbar-nav .active {
+    font-weight: bold;
+    color: #EA482B !important;
+}
+
+
+.contact-heading {
+    color: rgb(23, 0, 0);
+    font-size: 55px;
+    font-weight: 550;
+}
+
+.contact-text {
+    color: black;
+    font-size: 30px;
+    font-weight: 500;
+    max-width: 900px;
+}
+
+.contact-container {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: row;
+    width: 300px;
+    margin-top: 10px;
+    padding-left: 0px;
+    gap: 10px;
+}
+.img-contact {
+    height: 70px;
+}
+
+.contact-medium-heading {
+    color: rgb(23, 0, 0);
+    font-size: 50px;
+    font-weight: 550;
+}
+
+.blog-heading {
+    color: rgb(23, 0, 0);
+    font-size: 55px;
+    font-weight: 550;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+
+/* Основные стили блока */
+.blog-block {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important; /* Светло-серый фон всего блока */
+}
+
+.blog-heading {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.blog-heading::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, #6c757d, #adb5bd); /* Серый градиент */
+    border-radius: 2px;
+}
+
+/* Стили карточек */
+.link-card {
+    text-decoration: none !important;
+    color: inherit;
+    transition: transform 0.3s ease;
+    display: block;
+    height: 100%;
+}
+
+.link-card:hover {
+    transform: translateY(-8px);
+}
+
+.recipe-card {
+    background-color: #e9ecef; /* Серый фон карточки */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.link-card:hover .recipe-card {
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    background-color: #e9ecef; /* Серый фон карточки */
+}
+
+/* Стили изображения */
+.recipe-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: transform 0.5s ease;
+}
+
+.link-card:hover .recipe-img {
+    transform: scale(1.05);
+}
+
+/* Заглушка для отсутствующего изображения */
+.no-image-placeholder {
+    height: 200px;
+    background: #ced4da; /* Серый фон заглушки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.no-image-placeholder .fas {
+    font-size: 4rem;
+    color: #868e96;
+    transition: all 0.3s ease;
+}
+
+.link-card:hover .no-image-placeholder {
+  background: #adb5bd; /* Темнее при наведении */
+}
+
+.link-card:hover .no-image-placeholder .fas {
+    transform: scale(1.1);
+    color: #495057;
+}
+
+/* Стили контента */
+.featured-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recipe-heading {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: #343a40; /* Темно-серый цвет */
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.blog-card {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    transition: transform 0.5s ease;
+}
+
+.link-card:hover .recipe-heading {
+    color: #212529; /* Чёрный при наведении */
+}
+
+.recipe-text {
+    color: #495057; /* Серый цвет текста */
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 0;
+    flex-grow: 1;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .recipe-img, .no-image-placeholder {
+        height: 180px;
+    }
+}
+
+@media (max-width: 992px) {
+    .recipe-block.row-cols-lg-6 > * {
+        flex: 0 0 33.333%;
+        max-width: 33.333%;
+    }
+    
+    .recipe-img, .no-image-placeholder {
+        height: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .recipe-block.row-cols-md-3 > * {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    .recipe-heading {
+        font-size: 1.15rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .recipe-block.row-cols-2 > * {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .recipe-img, .no-image-placeholder {
+        height: 200px;
+    }
+    
+    .blog-heading {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    .blog-heading::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Анимация загрузки */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.col {
+    animation: fadeIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+/* Добавляем задержку для анимации каждого элемента */
+.col:nth-child(1) { animation-delay: 0.1s; }
+.col:nth-child(2) { animation-delay: 0.2s; }
+.col:nth-child(3) { animation-delay: 0.3s; }
+.col:nth-child(4) { animation-delay: 0.4s; }
+.col:nth-child(5) { animation-delay: 0.5s; }
+.col:nth-child(6) { animation-delay: 0.6s; }
+
+.my-photo {
+    height: 130px;
+}
+
+.about-me-block {
+    height: 500px;
+    background-color: #e6e6ed;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.about-me-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 40px;
+}
+
+.about-me-text-container {
+    max-width: 700px;
+}
+
+.my-photo {
+    width: 280px;
+    height: 350px;
+    border-radius: 20px;
+    object-fit: cover;
+
+    /* border: 3px solid #212529; */
+}
+
+.about-me-heading {
+    font-size: 55px;
+    font-weight: 550;
+}
+
+.about-me-text {
+    font-size: 25px;
+    font-weight: 525;
+}
+
+.recipe-heading {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.recipe-card {
+    /* border: 3px solid #212529; */
+    border-radius: 20px;
+    width: 300px; 
+    background-color: rgb(243, 242, 242);
+    /* padding: 10px; */
+}
+
+.my-projects {
+    background-color: white;
+}
+
+.btn-my-style {
+    margin-bottom: 10px;
+    border-radius: 0px;
+}
+
+.post-container {
+    width: 100%;
+    padding: 10px;
+    background-color: #f8f9fa;
+    height: 1000px;
+}
+
+.post-image {
+    max-width: 634.01px;
+    max-height: 482px;
+    border-radius: 0px;
+}
+
+.post__blocks-container {
+    display: flex;
+    flex-direction: row; /* Элементы в строку */
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: flex-start; /* Выравнивание по верхнему краю */
+    gap: 40px; /* Расстояние между блоками */
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */
+    padding: 0 20px; /* Отступы по краям */
+    width: 100%;
+    margin-top: 25px;
+}
+
+/* Общие стили для обоих блоков */
+.post__left-block {
+    flex: 1; /* Равномерное распределение пространства */
+}
+
+.post__right-block {
+    flex: 1; /* Равномерное распределение пространства */
+    max-width: 600px; /* Максимальная ширина блока */
+}
+
+/* Специфичные стили для левого блока */
+.post__left-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрирование содержимого */
+}
+
+
+.back-btn {
+    background-color: #f8f9fa;
+    color: #b9babb;
+    text-decoration: none;
+    font-size: 20px;
+    padding-left: 100px;
+    width: 100%;
+}
+
+.image-container {
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    justify-content: center;
+    width: 634.01px;
+    height: 482px;
+    background-color: #212529a4;
+}

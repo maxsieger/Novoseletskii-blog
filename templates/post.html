@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">Главная</a>
+                <a class="nav-link {% if request.path == '/blog/' %}active{% endif %}" href="/blog/">Блог</a>
+                <a class="nav-link {% if request.path == '/contacts/' %}active{% endif %}" href="/contacts/">Контакты</a>
+            </div>
+        </div>
+    </nav>
+    <div class="post-container">
+        <article class="blog-post">
+            <!-- Исправленный блок изображения -->
+            <div class="mt-4">
+                <a href="{{ url_for('render', name='blog') }}" class="back-btn">
+                    ← Назад к списку постов
+                </a>
+            </div>
+            <div class="post__blocks-container">
+                <div class="post__left-block">
+                    {% if post.image %}
+                    <div class="text-center mb-4 image-container">
+                        <img src="{{ url_for('static', filename='uploads/' + post.image.split('/')[-1]) }}"
+                             alt="{{ post.title }}"
+                             class="post-image">
+                    </div>
+                </div>
+                {% endif %}
+                <div class="post__right-block">
+                    <h1 class="blog-post-title">{{ post.title }}</h1>
+                    <div class="blog-post-content">
+                        {{ post.content|safe }}
+                    </div>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endblock %}

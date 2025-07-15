@@ -18,6 +18,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -34,7 +37,8 @@
     "Python.main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/maksn/PycharmProjects/SamProject",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/maksn/Documents/GitHub/Novoseletskii-blog",
     "settings.editor.selected.configurable": "template.copyright.formatting"
   }
 }]]></component>

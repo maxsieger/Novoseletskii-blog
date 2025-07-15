@@ -1,144 +1,145 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pacifico&display=swap');
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .add_container {
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 15px;
-        }
-        .add_heading {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-            font-size: 2.5rem;
-            position: relative;
-        }
-        .add_heading:after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: #3498db;
-            margin: 10px auto;
-            border-radius: 2px;
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #2c3e50;
-            font-size: 1.1rem;
-        }
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e1e8ed;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus,
-        textarea:focus {
-            border-color: #3498db;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-        textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-        .image-preview {
-            margin-top: 15px;
-            text-align: center;
-        }
-        .image-preview img {
-            max-width: 100%;
-            max-height: 300px;
-            border-radius: 8px;
-            border: 2px dashed #ddd;
-            padding: 10px;
-        }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .btn:hover {
-            background: #2980b9;
-        }
-        .btn i {
-            margin-right: 10px;
-        }
-        .flashes {
-            margin-bottom: 20px;
-        }
-        .flash {
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-        .flash.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .flash.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .file-input {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
-        .file-input input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-        }
-        .file-input-label {
-            display: block;
-            padding: 14px;
-            background: #f8f9fa;
-            border: 2px dashed #e1e8ed;
-            border-radius: 8px;
-            text-align: center;
-            color: #6c757d;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .file-input-label:hover {
-            background: #e9ecef;
-            border-color: #3498db;
-            color: #3498db;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.add_container {
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+}
+.add_heading {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+    position: relative;
+}
+.add_heading:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background: #3498db;
+    margin: 10px auto;
+    border-radius: 2px;
+}
+.form-group {
+    margin-bottom: 25px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+input[type="text"]:focus,
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+.image-preview {
+    margin-top: 15px;
+    text-align: center;
+}
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    border: 2px dashed #ddd;
+    padding: 10px;
+}
+.btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.btn:hover {
+    background: #2980b9;
+}
+.btn i {
+    margin-right: 10px;
+}
+.flashes {
+    margin-bottom: 20px;
+}
+.flash {
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+.flash.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.flash.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.file-input {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+.file-input input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+.file-input-label {
+    display: block;
+    padding: 14px;
+    background: #f8f9fa;
+    border: 2px dashed #e1e8ed;
+    border-radius: 8px;
+    text-align: center;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.file-input-label:hover {
+    background: #e9ecef;
+    border-color: #3498db;
+    color: #3498db;
+}
 
 .first-block {
     background-image: url(../image/bkg-image.png);
@@ -164,24 +165,6 @@
     font-weight: 525;
     margin-top: 0px;
     padding-top: 0px;
-}
-
-.navbar-nav .active {
-    background-color: none;
-    margin: 0;
-}
-.navbar {
-    padding: 15px;
-}
-
-.nav-link, .logo-name{
-    color: black;
-    opacity: 80%;
-}
-
-.navbar-nav .active {
-    font-weight: bold;
-    color: #EA482B !important;
 }
 
 
@@ -369,7 +352,7 @@
 
 
 .container-block {
-    background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+    background: linear-gradient(135deg, #1a2a6c, #aea3ef, #102164);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -586,15 +569,15 @@ footer {
         flex-direction: column;
         gap: 40px;
     }
-    
+
     .footer-logo, .footer-contact, .footer-social {
         min-width: 100%;
     }
-    
+
     footer h1 {
         font-size: 2.5rem;
     }
-    
+
     footer p {
         font-size: 1.2rem;
     }
@@ -604,15 +587,15 @@ footer {
     .content {
         padding: 20px;
     }
-    
+
     footer h1 {
         font-size: 2rem;
     }
-    
+
     footer p {
         font-size: 1rem;
     }
-    
+
     .footer-wave {
         top: -50px;
         height: 70px;
@@ -624,6 +607,10 @@ footer {
     .recipe-img, .no-image-placeholder {
         height: 180px;
     }
+    .greeting-block {
+        margin-top: 170px;
+        margin-left: 50px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -633,6 +620,10 @@ footer {
 
     .recipe-img, .no-image-placeholder {
         height: 180px;
+    }
+    .greeting-block {
+        margin-top: 170px;
+        margin-left: 50px;
     }
 }
 
@@ -650,6 +641,10 @@ footer {
     .featured-content {
         padding: 15px;
     }
+    .greeting-block {
+        margin-top: 150px;
+        text-align: left;
+    }
 }
 
 @media (max-width: 576px) {
@@ -664,12 +659,14 @@ footer {
 
     .blog-heading {
         font-size: 1.8rem;
-        text-align: center;
     }
 
     .blog-heading::after {
         left: 50%;
         transform: translateX(-50%);
+    }
+    .greeting-block {
+        margin-top: 50px;
     }
 }
 
@@ -748,8 +745,6 @@ footer {
     height: 350px;
     border-radius: 20px;
     object-fit: cover;
-
-    /* border: 3px solid #212529; */
 }
 
 .about-me-heading {
@@ -770,11 +765,9 @@ footer {
 }
 
 .recipe-card {
-    /* border: 3px solid #212529; */
     border-radius: 20px;
     width: 300px;
     background-color: rgb(243, 242, 242);
-    /* padding: 10px; */
 }
 
 .my-projects {
@@ -801,34 +794,31 @@ footer {
 
 .post__blocks-container {
     display: flex;
-    flex-direction: row; /* Элементы в строку */
-    justify-content: center; /* Центрирование по горизонтали */
-    align-items: flex-start; /* Выравнивание по верхнему краю */
-    gap: 40px; /* Расстояние между блоками */
-    max-width: 1200px; /* Максимальная ширина контейнера */
-    margin: 0 auto; /* Центрирование контейнера */
-    padding: 0 20px; /* Отступы по краям */
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
     width: 100%;
     margin-top: 25px;
 }
 
-/* Общие стили для обоих блоков */
 .post__left-block {
-    flex: 1; /* Равномерное распределение пространства */
+    flex: 1;
 }
 
 .post__right-block {
-    flex: 1; /* Равномерное распределение пространства */
-    max-width: 600px; /* Максимальная ширина блока */
+    flex: 1;
+    max-width: 600px;
 }
 
-/* Специфичные стили для левого блока */
 .post__left-block {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Центрирование содержимого */
+    align-items: center;
 }
-
 
 .back-btn {
     background-color: #f8f9fa;
@@ -847,125 +837,6 @@ footer {
     width: 634.01px;
     height: 482px;
     background-color: #212529a4;
-}
-
-/* =============== МОБИЛЬНАЯ АДАПТАЦИЯ =============== */
-@media (max-width: 992px) {
-    .about-me-container {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-
-    .about-me-text-container {
-        max-width: 100%;
-    }
-
-    .my-photo {
-        width: 200px;
-        height: 250px;
-    }
-}
-
-@media (max-width: 768px) {
-    .first-block {
-        height: 600px;
-    }
-
-    .greeting-block {
-        margin-left: 20px;
-        margin-top: 200px;
-    }
-
-    .greeting-heading {
-        font-size: 32px;
-    }
-
-    .greeting-text {
-        font-size: 22px;
-    }
-
-    .contact-container {
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-
-    .contact-heading {
-        font-size: 40px;
-    }
-
-    .contact-text {
-        font-size: 22px;
-    }
-
-    .contact-medium-heading {
-        font-size: 35px;
-    }
-
-    .blog-heading {
-        font-size: 40px;
-        text-align: center;
-    }
-
-    .post__blocks-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .image-container {
-        width: 100%;
-        height: auto;
-    }
-
-    .back-btn {
-        padding-left: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .navbar-brand .logo-name {
-        font-size: 16px;
-    }
-
-    .greeting-heading {
-        font-size: 28px;
-    }
-
-    .greeting-text {
-        font-size: 18px;
-    }
-
-    .contact-heading,
-    .contact-medium-heading {
-        font-size: 30px;
-    }
-
-    .contact-text {
-        font-size: 18px;
-    }
-
-    .img-contact {
-        height: 50px;
-    }
-
-    .add_container {
-        padding: 15px;
-        margin: 20px;
-    }
-
-    .add_heading {
-        font-size: 1.8rem;
-    }
-
-    .blog-heading {
-        font-size: 32px;
-    }
-
-    .post-image {
-        max-width: 100%;
-        height: auto;
-    }
 }
 
 /* =============== МОБИЛЬНАЯ АДАПТАЦИЯ =============== */
@@ -1174,7 +1045,7 @@ footer {
     }
 }
 
-/* Общие улучшения для мобильных */
+/* Общие улучшения для мобильных
 @media (max-width: 768px) {
     .footer-container {
         flex-direction: column;
@@ -1225,314 +1096,4 @@ footer {
     }
 }
 
-/* Добавим в конец файла */
-@media (max-width: 768px) {
-    /* Общие улучшения */
-    body {
-        font-size: 18px;
-    }
 
-    /* Увеличим навигацию */
-    .navbar-nav .nav-link {
-        padding: 15px 20px;
-        font-size: 20px;
-        border-bottom: 1px solid #eee;
-    }
-
-    .navbar-toggler {
-        padding: 12px;
-        font-size: 24px;
-    }
-
-    /* Главная страница */
-    .first-block {
-        height: 500px;
-        background-position: center center;
-    }
-
-
-    .greeting-heading {
-        font-size: 32px;
-        line-height: 1.4;
-    }
-
-    .greeting-text {
-        font-size: 22px;
-        margin-top: 15px;
-    }
-
-    .about-me-block {
-        height: auto;
-        padding: 40px 20px;
-    }
-
-    .about-me-container {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
-    }
-
-    .about-me-heading {
-        font-size: 32px;
-    }
-
-    .about-me-text {
-        font-size: 20px;
-        line-height: 1.6;
-    }
-
-    .my-photo {
-        width: 220px;
-        height: 280px;
-    }
-
-    .blog-heading {
-        font-size: 32px;
-        text-align: center;
-        margin-left: 0;
-    }
-
-    /* Контакты */
-    .contact-container {
-        margin: 40px 20px;
-        text-align: center;
-    }
-
-    .contact-heading {
-        font-size: 32px;
-    }
-
-    .contact-medium-heading {
-        font-size: 28px;
-    }
-
-    .contact-text {
-        font-size: 20px;
-        margin: 20px auto;
-    }
-
-    .contact-list {
-        justify-content: center;
-        width: 100%;
-        margin: 30px 0;
-    }
-
-    .img-contact {
-        height: 70px;
-        margin: 0 10px;
-    }
-
-    /* Формы и кнопки */
-    .add_container {
-        margin: 20px;
-        padding: 25px;
-    }
-
-    .add_heading {
-        font-size: 28px;
-    }
-
-    input[type="text"],
-    textarea,
-    .file-input-label {
-        padding: 18px;
-        font-size: 18px;
-    }
-
-    .btn {
-        padding: 18px;
-        font-size: 20px;
-    }
-
-    /* Посты и блог */
-    .recipe-block {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .recipe-card {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .recipe-heading {
-        font-size: 24px;
-    }
-
-    .recipe-text {
-        font-size: 18px;
-    }
-
-    .post-container {
-        padding: 20px;
-        height: auto;
-    }
-
-    .post__blocks-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .image-container {
-        width: 100%;
-        height: auto;
-        max-height: 350px;
-    }
-
-    .post-image {
-        max-width: 100%;
-        height: auto;
-    }
-
-    .blog-post-title {
-        font-size: 32px;
-    }
-
-    .blog-post-content {
-        font-size: 20px;
-        line-height: 1.7;
-    }
-
-    .back-btn {
-        font-size: 20px;
-        padding: 15px;
-        width: 100%;
-        text-align: center;
-    }
-
-    /* Футер */
-    .footer-container {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .footer-logo,
-    .footer-contact,
-    .footer-social {
-        min-width: 100%;
-        text-align: center;
-    }
-
-    .footer-logo p {
-        margin: 0 auto;
-    }
-
-    .social-icons {
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .social-icon {
-        width: 60px;
-        height: 60px;
-    }
-
-    .social-icon i {
-        font-size: 24px;
-    }
-
-    /* Управление постами */
-    .post-item {
-        padding: 20px;
-    }
-
-    .post-actions .btn {
-        padding: 12px 20px;
-        font-size: 18px;
-        margin: 10px 5px;
-    }
-
-    /* Страница 404 */
-    .error-heading {
-        font-size: 36px;
-    }
-
-    .error-text {
-        font-size: 24px;
-        margin: 20px 0;
-    }
-
-    .btn-primary {
-        padding: 15px 30px;
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    /* Еще больше увеличим элементы на очень маленьких экранах */
-    body {
-        font-size: 20px;
-    }
-
-    .greeting-heading {
-        font-size: 28px;
-    }
-
-    .greeting-text {
-        font-size: 20px;
-        margin-top: 40px;
-    }
-
-    .about-me-heading {
-        font-size: 28px;
-    }
-
-    .about-me-text {
-        font-size: 18px;
-    }
-
-    .contact-heading {
-        font-size: 28px;
-    }
-
-    .contact-medium-heading {
-        font-size: 24px;
-    }
-
-    .contact-text {
-        font-size: 18px;
-    }
-
-    .img-contact {
-        height: 60px;
-    }
-
-    .add_heading {
-        font-size: 24px;
-    }
-
-    input[type="text"],
-    textarea,
-    .file-input-label {
-        padding: 16px;
-        font-size: 16px;
-    }
-
-    .btn {
-        padding: 16px;
-        font-size: 18px;
-    }
-
-    .recipe-heading {
-        font-size: 22px;
-    }
-
-    .recipe-text {
-        font-size: 16px;
-    }
-
-    .blog-post-title {
-        font-size: 28px;
-    }
-
-    .blog-post-content {
-        font-size: 18px;
-    }
-
-    .social-icon {
-        width: 55px;
-        height: 55px;
-    }
-}

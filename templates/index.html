@@ -1,25 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
-    <section class="first-block">
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/"><span class="logo-name">Новоселецкий Максим</span></a>
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavAltMarkup"
-                        aria-controls="navbarNavAltMarkup"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav ms-auto">
-                        <a class="nav-link" href="/">Главная</a>
-                        <a class="nav-link" href="/contacts/">Контакты</a>
-                    </div>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="logo-name">Новоселецкий Максим</span>
+            </a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link active" href="/">Главная</a>
+                    <a class="nav-link" href="/contacts/">Контакты</a>
                 </div>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <section class="first-block">
         <div class="greeting-block">
             <p class="greeting-heading"><b>Привет! Меня зовут Максим и мне 14 лет.</b></p>
             <span class="greeting-text"><b>Я люблю программировать и знаю такие языки как: HTML, CSS, Python, JavaScript.</b></span>
@@ -132,4 +134,16 @@
             </div>
     </footer>
 </div>
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+            navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+            navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        } else {
+            navbar.style.backgroundColor = 'transparent';
+            navbar.style.boxShadow = 'none';
+        }
+    });
+});
 {% endblock %}

@@ -195,7 +195,7 @@ def page_not_found(e):
 
 app.route('/admin/settings', methods=['GET', 'POST'])
 
-
+@app.route('/admin/settings', methods=['GET', 'POST'])  # <-- Добавить @app.route!
 @admin_required
 def admin_settings():
     db = Database()

@@ -193,7 +193,6 @@ def page_not_found(e):
     return render_template('404.html', page_name='Страница не найдена'), 404
 
 
-app.route('/admin/settings', methods=['GET', 'POST'])
 
 @app.route('/admin/settings', methods=['GET', 'POST'])  # <-- Добавить @app.route!
 @admin_required

@@ -3,6 +3,7 @@ import os
 import functools
 from database import Database
 from filters import register_filters
+import hashlib
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
@@ -94,6 +95,7 @@ def manage_posts():
     except Exception as e:
         flash(f'Ошибка при загрузке постов: {str(e)}', 'error')
         return redirect(url_for('render'))
+
 
 
 @app.route('/admin/create-post/', methods=['GET', 'POST'])
@@ -191,5 +193,52 @@ def page_not_found(e):
     return render_template('404.html', page_name='Страница не найдена'), 404
 
 
+app.route('/admin/settings', methods=['GET', 'POST'])
+
+
+@admin_required
+def admin_settings():
+    db = Database()
+    admin = db.get_admin(1)
+
+    if not admin:
+        flash('Администратор не найден', 'error')
+        return redirect(url_for('manage_posts'))
+
+    if request.method == 'POST':
+        current_password = request.form.get('current_password', '')
+        new_username = request.form.get('new_username', '')
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+
+        # Проверка заполнения полей
+        if not all([current_password, new_username, new_password, confirm_password]):
+            flash('Все поля обязательны для заполнения', 'error')
+            return redirect(url_for('admin_settings'))
+
+        # Проверка текущего пароля
+        hashed_current = hashlib.sha256(current_password.encode()).hexdigest()
+        if hashed_current != admin['password']:
+            flash('Неверный текущий пароль', 'error')
+            return redirect(url_for('admin_settings'))
+
+        # Проверка совпадения новых паролей
+        if new_password != confirm_password:
+            flash('Новые пароли не совпадают', 'error')
+            return redirect(url_for('admin_settings'))
+
+        # Обновление учетных данных
+        try:
+            db.update_admin(1, new_username, new_password)
+            flash('Учетные данные успешно обновлены! Для входа используйте новые данные', 'success')
+            # Выход пользователя после изменения учетных данных
+            session.pop('authenticated', None)
+            return redirect(url_for('admin_login'))
+        except Exception as e:
+            flash(f'Ошибка при обновлении: {str(e)}', 'error')
+
+    return render_template('admin_settings.html', page_name='Настройки', admin=admin)
+
+
 if __name__ == "__main__":
-    app.run(port=5002, debug=True)
+    app.run(port=5000)

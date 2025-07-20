@@ -17,35 +17,91 @@
         }
         .btn-edit { background: #4CAF50; color: white; }
         .btn-delete { background: #f44336; color: white; }
+
+        .post-list { margin: 20px 0; }
+        .post-item {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: white;
+        }
+        .post-actions {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .btn-action {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+        }
+        .btn-edit { background: #4CAF50; }
+        .btn-delete { background: #f44336; }
+        .btn-view { background: #2196F3; }
     </style>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">Сайт</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('manage_posts') }}">Управление постами</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_create_post') }}">Создать пост</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_settings') }}">Настройки</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_logout') }}">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    <h1>Управление постами</h1>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Управление постами</h1>
+    </div>
 
     <div class="post-list">
         {% for post in posts %}
         <div class="post-item">
             <h3>{{ post.title }}</h3>
             {% if post.image %}
-            <img src="{{ url_for('static', filename=post.image) }}" width="200">
+            <img src="{{ url_for('static', filename=post.image) }}" width="200" class="img-thumbnail mb-2">
             {% endif %}
             <p>{{ post.content|truncate(100) }}</p>
             <div class="post-actions">
-                <a href="{{ url_for('admin_edit_post', post_id=post.id) }}" class="btn btn-edit">Редактировать</a>
+                <a href="{{ url_for('admin_edit_post', post_id=post.id) }}"
+                   class="btn-action btn-edit">
+                    <i class="fas fa-edit"></i> Редактировать
+                </a>
+                <a href="{{ url_for('view_post', post_id=post.id) }}"
+                   class="btn-action btn-view" target="_blank">
+                    <i class="fas fa-eye"></i> Просмотреть
+                </a>
                 <form action="{{ url_for('admin_delete_post', post_id=post.id) }}" method="POST" style="display:inline;">
-                    <button type="submit" class="btn btn-delete">Удалить</button>
+                    <button type="submit" class="btn-action btn-delete">
+                        <i class="fas fa-trash"></i> Удалить
+                    </button>
                 </form>
             </div>
         </div>
         {% else %}
-        <p>Нет доступных постов</p>
+        <div class="alert alert-info">
+            Нет доступных постов. Создайте первый пост!
+        </div>
         {% endfor %}
     </div>
 

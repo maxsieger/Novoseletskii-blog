@@ -900,7 +900,6 @@ footer {
 
     .post__blocks-container {
         flex-direction: column;
-        align-items: center;
         gap: 20px;
     }
 

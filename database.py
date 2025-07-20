@@ -128,3 +128,24 @@ class Database:
         cursor.execute("DELETE FROM posts WHERE id = ?", (post_id,))
         conn.commit()
         conn.close()
+
+    def get_admin(self, admin_id=1):
+        """Получить данные администратора"""
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, name, password FROM admin WHERE id = ?", (admin_id,))
+        admin = cursor.fetchone()
+        conn.close()
+        return dict(admin) if admin else None
+
+    def update_admin(self, admin_id, name, password):
+        """Обновить данные администратора"""
+        hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+        conn = self.get_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE admin SET name = ?, password = ? WHERE id = ?",
+            (name, hashed_pw, admin_id)
+        )
+        conn.commit()
+        conn.close()

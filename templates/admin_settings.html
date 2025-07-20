@@ -1,47 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <style>
-        .post-list { margin: 20px 0; }
-        .post-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-        }
-        .post-actions { margin-top: 10px; }
-        .btn {
-            padding: 5px 10px;
-            margin-right: 5px;
-            text-decoration: none;
-            border-radius: 3px;
-        }
-        .btn-edit { background: #4CAF50; color: white; }
-        .btn-delete { background: #f44336; color: white; }
-
-        .post-list { margin: 20px 0; }
-        .post-item {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background: white;
-        }
-        .post-actions {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-        }
-        .btn-action {
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            color: white;
-            font-weight: 500;
-        }
-        .btn-edit { background: #4CAF50; }
-        .btn-delete { background: #f44336; }
-        .btn-view { background: #2196F3; }
-    </style>
+    <!-- ... существующий навбар ... -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Сайт</a>
@@ -69,104 +28,119 @@
         </div>
     </nav>
 
+    <div class="card border-0 shadow">
+        <div class="card-header bg-primary text-white py-3">
+            <h2 class="h4 mb-0"><i class="fas fa-cog me-2"></i>Настройки администратора</h2>
+        </div>
+        <div class="card-body p-4">
+            <form method="POST" action="{{ url_for('admin_settings') }}" class="needs-validation" novalidate>
+                <div class="mb-4">
+                    <h4 class="mb-3"><i class="fas fa-user me-2"></i>Текущие учетные данные</h4>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Имя пользователя</label>
+                            <div class="form-control bg-light">{{ admin.name }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Статус</label>
+                            <div class="form-control bg-light">Администратор</div>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="card border-0 shadow">
-    <div class="card-header bg-primary text-white py-3">
-        <h2 class="h4 mb-0"><i class="fas fa-cog me-2"></i>Настройки администратора</h2>
+                <hr class="my-4">
+
+                <div class="mb-4">
+                    <h4 class="mb-3"><i class="fas fa-user-edit me-2"></i>Изменить имя пользователя</h4>
+
+                    <div class="mb-3">
+                        <label for="new_username" class="form-label">Новое имя пользователя</label>
+                        <input type="text" class="form-control" id="new_username" name="new_username"
+                               placeholder="Введите новое имя пользователя">
+                        <div class="form-text">Оставьте пустым, если не хотите менять</div>
+                    </div>
+                </div>
+
+                <hr class="my-4">
+
+                <div class="mb-4">
+                    <h4 class="mb-3"><i class="fas fa-key me-2"></i>Изменить пароль</h4>
+
+                    <div class="mb-3">
+                        <label for="current_password" class="form-label">Текущий пароль</label>
+                        <input type="password" class="form-control" id="current_password" name="current_password"
+                               placeholder="Введите текущий пароль" required>
+                        <div class="invalid-feedback">Обязательное поле для подтверждения изменений</div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="new_password" class="form-label">Новый пароль</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password"
+                                   placeholder="Введите новый пароль">
+                            <div class="form-text">Минимум 6 символов</div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="confirm_password" class="form-label">Подтвердите пароль</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                                   placeholder="Повторите новый пароль">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-5">
+                    <button type="submit" class="btn btn-success btn-lg px-4">
+                        <i class="fas fa-save me-2"></i>Сохранить изменения
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body p-4">
-        <form method="POST" action="{{ url_for('admin_settings') }}" class="needs-validation" novalidate>
-            <div class="mb-4">
-                <h4 class="mb-3"><i class="fas fa-user me-2"></i>Текущие учетные данные</h4>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Текущее имя пользователя</label>
-                        <div class="form-control bg-light">{{ admin.name }}</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Статус</label>
-                        <div class="form-control bg-light">Администратор</div>
-                    </div>
-                </div>
-            </div>
 
-            <hr class="my-4">
+    <script>
+    // Валидация формы
+    (() => {
+      'use strict'
+      const forms = document.querySelectorAll('.needs-validation')
 
-            <div class="mb-4">
-                <h4 class="mb-3"><i class="fas fa-key me-2"></i>Изменить учетные данные</h4>
+      // Кастомная валидация для паролей
+      const validatePasswords = () => {
+        const newPassword = document.getElementById('new_password').value
+        const confirmPassword = document.getElementById('confirm_password').value
 
-                <div class="mb-3">
-                    <label for="new_username" class="form-label">Новое имя пользователя</label>
-                    <input type="text" class="form-control" id="new_username" name="new_username"
-                           placeholder="Введите новое имя пользователя" required>
-                    <div class="invalid-feedback">Пожалуйста, введите новое имя пользователя</div>
-                </div>
+        if (newPassword && newPassword !== confirmPassword) {
+          document.getElementById('confirm_password').setCustomValidity('Пароли не совпадают')
+          return false
+        }
 
-                <div class="mb-3">
-                    <label for="current_password" class="form-label">Текущий пароль</label>
-                    <input type="password" class="form-control" id="current_password" name="current_password"
-                           placeholder="Введите текущий пароль" required>
-                    <div class="invalid-feedback">Пожалуйста, введите текущий пароль</div>
-                </div>
+        if (newPassword && newPassword.length < 6) {
+          document.getElementById('new_password').setCustomValidity('Пароль слишком короткий')
+          return false
+        }
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="new_password" class="form-label">Новый пароль</label>
-                        <input type="password" class="form-control" id="new_password" name="new_password"
-                               placeholder="Введите новый пароль" required>
-                        <div class="invalid-feedback">Пожалуйста, введите новый пароль</div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="confirm_password" class="form-label">Подтвердите новый пароль</label>
-                        <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                               placeholder="Подтвердите новый пароль" required>
-                        <div class="invalid-feedback">Пароли должны совпадать</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-between mt-5">
-                <button type="submit" class="btn btn-success btn-lg px-4">
-                    <i class="fas fa-save me-2"></i>Сохранить изменения
-                </button>
-                <a href="{{ url_for('manage_posts') }}" class="btn btn-outline-secondary">
-                    <i class="fas fa-arrow-left me-2"></i>Назад к управлению
-                </a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<script>
-// Валидация формы
-(() => {
-  'use strict'
-
-  const forms = document.querySelectorAll('.needs-validation')
-
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
-
-      // Проверка совпадения паролей
-      const newPassword = document.getElementById('new_password').value
-      const confirmPassword = document.getElementById('confirm_password').value
-
-      if (newPassword !== confirmPassword) {
-        document.getElementById('confirm_password').setCustomValidity('Пароли не совпадают')
-        event.preventDefault()
-        event.stopPropagation()
-      } else {
         document.getElementById('confirm_password').setCustomValidity('')
+        document.getElementById('new_password').setCustomValidity('')
+        return true
       }
 
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-</script>
+      // Основной обработчик
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          // Проверка текущего пароля
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
 
+          // Проверка паролей
+          if (!validatePasswords()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+    })()
+    </script>
 {% endblock %}

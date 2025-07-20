@@ -97,9 +97,9 @@ class Database:
         conn = self.get_connection()
         cursor = conn.cursor()
         cursor.execute("SELECT MAX(id) FROM posts")
-        max_id = cursor.fetchone()[0]
+        result = cursor.fetchone()[0]
         conn.close()
-        return max_id if max_id else 0
+        return result if result is not None else 0
 
     def get_post(self, post_id: int):
         conn = self.get_connection()
@@ -138,14 +138,31 @@ class Database:
         conn.close()
         return dict(admin) if admin else None
 
-    def update_admin(self, admin_id, name, password):
-        """Обновить данные администратора"""
-        hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+
+    def update_admin(self, admin_id, name=None, password=None):
+        """Обновить данные администратора (раздельно)"""
         conn = self.get_connection()
         cursor = conn.cursor()
-        cursor.execute(
-            "UPDATE admin SET name = ?, password = ? WHERE id = ?",
-            (name, hashed_pw, admin_id)
-        )
+
+        updates = []
+        params = []
+
+        if name is not None:
+            updates.append("name = ?")
+            params.append(name)
+
+        if password is not None:
+            hashed_pw = hashlib.sha256(password.encode()).hexdigest()
+            updates.append("password = ?")
+            params.append(hashed_pw)
+
+        if not updates:
+            conn.close()
+            return  # Ничего не обновлять
+
+        params.append(admin_id)
+        query = f"UPDATE admin SET {', '.join(updates)} WHERE id = ?"
+        cursor.execute(query, params)
         conn.commit()
         conn.close()
+

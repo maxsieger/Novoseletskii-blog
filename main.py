@@ -193,48 +193,73 @@ def page_not_found(e):
     return render_template('404.html', page_name='Страница не найдена'), 404
 
 
-
-@app.route('/admin/settings', methods=['GET', 'POST'])  # <-- Добавить @app.route!
+@app.route('/admin/settings', methods=['GET', 'POST'])
 @admin_required
 def admin_settings():
     db = Database()
-    admin = db.get_admin(1)
-
-    if not admin:
-        flash('Администратор не найден', 'error')
-        return redirect(url_for('manage_posts'))
+    admin = db.get_admin(2)
 
     if request.method == 'POST':
         current_password = request.form.get('current_password', '')
-        new_username = request.form.get('new_username', '')
-        new_password = request.form.get('new_password', '')
-        confirm_password = request.form.get('confirm_password', '')
+        new_username = request.form.get('new_username', '').strip()
+        new_password = request.form.get('new_password', '').strip()
+        confirm_password = request.form.get('confirm_password', '').strip()
 
-        # Проверка заполнения полей
-        if not all([current_password, new_username, new_password, confirm_password]):
-            flash('Все поля обязательны для заполнения', 'error')
+        # Проверка текущего пароля для любых изменений
+        if not current_password:
+            flash('Введите текущий пароль для подтверждения изменений', 'error')
             return redirect(url_for('admin_settings'))
 
-        # Проверка текущего пароля
         hashed_current = hashlib.sha256(current_password.encode()).hexdigest()
         if hashed_current != admin['password']:
             flash('Неверный текущий пароль', 'error')
             return redirect(url_for('admin_settings'))
 
-        # Проверка совпадения новых паролей
-        if new_password != confirm_password:
-            flash('Новые пароли не совпадают', 'error')
+        # Флаги изменений
+        username_changed = bool(new_username)
+        password_changed = bool(new_password)
+
+        if not username_changed and not password_changed:
+            flash('Не указаны данные для обновления', 'info')
             return redirect(url_for('admin_settings'))
 
-        # Обновление учетных данных
+        # Валидация изменения пароля
+        if password_changed:
+            if new_password != confirm_password:
+                flash('Новые пароли не совпадают', 'error')
+                return redirect(url_for('admin_settings'))
+            if len(new_password) < 6:
+                flash('Пароль должен быть не менее 6 символов', 'error')
+                return redirect(url_for('admin_settings'))
+
         try:
-            db.update_admin(1, new_username, new_password)
-            flash('Учетные данные успешно обновлены! Для входа используйте новые данные', 'success')
-            # Выход пользователя после изменения учетных данных
-            session.pop('authenticated', None)
-            return redirect(url_for('admin_login'))
+            # Раздельное обновление данных
+            update_name = new_username if username_changed else None
+            update_password = new_password if password_changed else None
+
+            db.update_admin(1, name=update_name, password=update_password)
+
+            # Формируем сообщение об успехе
+            messages = []
+            if username_changed:
+                messages.append('имя пользователя')
+                admin['name'] = new_username  # Обновляем локально для отображения
+            if password_changed:
+                messages.append('пароль')
+
+            flash(f'Успешно обновлено: {", ".join(messages)}!', 'success')
+
+            # Выход при смене пароля
+            if password_changed:
+                session.pop('authenticated', None)
+                flash('Для входа используйте новый пароль', 'info')
+                return redirect(url_for('admin_login'))
+
         except Exception as e:
             flash(f'Ошибка при обновлении: {str(e)}', 'error')
+            app.logger.error(f'Error in admin_settings: {str(e)}')
+            flash('Внутренняя ошибка сервера', 'error')
+            return redirect(url_for('manage_posts'))
 
     return render_template('admin_settings.html', page_name='Настройки', admin=admin)
 

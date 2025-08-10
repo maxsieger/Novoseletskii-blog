@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <style>
+        .navbar {
+            background-color: white;
+        }
+    </style>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="/">
@@ -35,8 +40,8 @@
                     {% if post.image %}
                     <div class="text-center mb-4 image-container">
                         <img src="{{ url_for('static', filename='uploads/' + post.image.split('/')[-1]) }}"
-                             alt="{{ post.title }}"
-                             class="post-image">
+                                alt="{{ post.title }}"
+                                class="post-image">
                     </div>
                 </div>
                 {% endif %}

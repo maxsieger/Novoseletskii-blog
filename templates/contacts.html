@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+            <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <span class="logo-name">Новоселецкий Максим</span>
+                </a>
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarNav"
+                        aria-controls="navbarNav"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link active" href="/">Главная</a>
+                        <a class="nav-link" href="/contacts/">Контакты</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="contact-container">
+            <span class="contact-heading">Свяжитесь со мной</span>
+            <p class="contact-text">Я могу сделать вам блог, сайт-визитку или же ленднинг. Или мы можем познакомится и делать совместные проекты!</p>
+            <span class="contact-medium-heading">Контакты:</span>
+            <ul class="contact-list">
+                <a class="contact-link" href="https://vk.com/max__new"><img class="img-contact" src="../static/image/VK.png" alt="VK"></a>
+                <a class="contact-link" href="https://t.me/ItsNewmax"><img class="img-contact" src="../static/image/tg.png" alt="Telegram"></a>
+                <a class="contact-link" href="https://tenchat.ru/ItsNewmax?utm_source=c1f5ccba-7d26-4055-8279-07f7b187279b"><img class="img-contact" src="../static/image/T_tenchat_red.png" alt="TenChat"></a>
+            </ul>
+        </div>
+    </section>
+</body>
+{% endblock %}

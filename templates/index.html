@@ -1,878 +1,151 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valday WEB - Создание сайтов и ботов под ключ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(-45deg, #0f0523, #1a0b3a, #2d0b5c, #3d1078);
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
-            color: white;
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 0;
-            position: relative;
-        }
-
-        @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* Добавляем эффект частиц для глубины */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000%) translateX(1000%) rotate(720deg);
-                opacity: 0;
-            }
-        }
-
-        /* Шапка сайта - возвращаем обычное поведение с плавными анимациями */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(30, 15, 60, 0.9);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
-                        opacity 0.5s ease;
-        }
-
-        header.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        header.scrolled {
-            background: rgba(20, 10, 40, 0.95);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #d9b3ff;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover .logo-icon {
-            background: rgba(255, 255, 255, 0.2);
-            transform: rotate(15deg);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-link {
-            color: #e6d5ff;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .nav-link:hover::before {
-            left: 100%;
-        }
-
-        .nav-link:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .nav-link.active {
-            color: white;
-            background: linear-gradient(135deg, rgba(90, 40, 150, 0.7), rgba(120, 60, 180, 0.7));
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            z-index: 1001;
-        }
-
-        .mobile-menu-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-            padding: 100px 20px 40px;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 40px 0;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-logo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            background: rgba(255, 255, 255, 0.1);
-            font-size: 4rem;
-            color: #d9b3ff;
-        }
-
-        .hero-logo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(90deg, #ffffff, #d9b3ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            color: #e6d5ff;
-        }
-
-        .bio-section {
-            background: rgba(30, 15, 60, 0.4);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .bio-section:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .bio-section:nth-child(3) {
-            animation-delay: 0.6s;
-        }
-
-        .bio-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            color: #d9b3ff;
-        }
-
-        h2 i {
-            margin-right: 10px;
-        }
-
-        .services {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .service {
-            background: linear-gradient(135deg, rgba(90, 40, 150, 0.7), rgba(120, 60, 180, 0.7));
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .service:hover {
-            background: linear-gradient(135deg, rgba(120, 60, 180, 0.9), rgba(150, 80, 210, 0.9));
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .social-link {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px) scale(1.1);
-            background: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .music-player {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: rgba(30, 15, 60, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 25px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 100;
-            transition: all 0.3s ease;
-            transform: translateX(150%);
-            animation: slideInRight 0.8s ease 1s forwards;
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(150%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        .music-player:hover {
-            background: rgba(40, 20, 80, 0.8);
-            transform: translateX(0) translateY(-3px);
-        }
-
-        .music-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #8a2be2, #6a0dad);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .music-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .music-info {
-            font-size: 0.9rem;
-            color: #e6d5ff;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.1rem;
-        }
-
-        .contact-item i {
-            color: #d9b3ff;
-            width: 25px;
-        }
-
-        .contact-link {
-            color: #e6d5ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-link:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Стили для блога и отзывов */
-        .blog-posts, .reviews {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .blog-post, .review {
-            background: rgba(30, 15, 60, 0.4);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            animation: fadeInUp 0.8s ease both;
-        }
-
-        .blog-post:nth-child(1), .review:nth-child(1) {
-            animation-delay: 0.3s;
-        }
-
-        .blog-post:nth-child(2), .review:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .blog-post:nth-child(3), .review:nth-child(3) {
-            animation-delay: 0.7s;
-        }
-
-        .blog-post:hover, .review:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(40, 20, 80, 0.5);
-        }
-
-        .blog-img, .review-avatar {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .blog-post:hover .blog-img, .review:hover .review-avatar {
-            transform: scale(1.05);
-        }
-
-        .blog-info, .review-info {
-            padding: 20px;
-        }
-
-        .blog-title, .review-author {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #d9b3ff;
-        }
-
-        .blog-post p, .review-text {
-            color: #e6d5ff;
-            margin-bottom: 15px;
-        }
-
-        .blog-date, .review-date {
-            font-size: 0.8rem;
-            color: #b39ddb;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .tagline {
-                font-size: 1.1rem;
-            }
-            
-            .music-player {
-                bottom: 20px;
-                right: 20px;
-                left: 20px;
-                justify-content: center;
-            }
-            
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(30, 15, 60, 0.95);
-                backdrop-filter: blur(15px);
-                flex-direction: column;
-                padding: 20px;
-                gap: 15px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-                transform: translateY(-20px);
-                opacity: 0;
-                transition: transform 0.3s ease, opacity 0.3s ease;
-            }
-            
-            .nav-links.active {
-                display: flex;
-                transform: translateY(0);
-                opacity: 1;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-        }
-
-        /* Анимированные элементы для дополнительной динамики */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0% { transform: translate(0, 0px); }
-            50% { transform: translate(0, -10px); }
-            100% { transform: translate(0, 0px); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(138, 43, 226, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(138, 43, 226, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(138, 43, 226, 0); }
-        }
-    </style>
-</head>
-<body>
-    <div class="particles" id="particles"></div>
-    
-    <!-- Шапка сайта -->
-    <header id="mainHeader">
-        <div class="nav-container">
-            <a href="#" class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                Valday WEB
+{% extends 'base.html' %}
+{% block content %}
+    <section class="first-block">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <span class="logo-name">Новоселецкий Максим</span>
             </a>
-            
-            <nav class="nav-links" id="navLinks">
-                <a href="#home" class="nav-link">Главная</a>
-                <a href="#blog" class="nav-link">Блог</a>
-                <a href="#reviews" class="nav-link">Отзывы</a>
-                <a href="#contacts" class="nav-link">Контакты</a>
-            </nav>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <i class="fas fa-bars"></i>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link active" href="/">Главная</a>
+                    <a class="nav-link" href="/contacts/">Контакты</a>
+                </div>
+            </div>
         </div>
-    </header>
-    
-    <div class="container">
-        <!-- Главная секция -->
-        <section id="home">
-            <div class="hero">
-                <div class="hero-logo floating">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h1>Команда "Valday WEB"</h1>
-                <p class="tagline">Создание лендингов, блогов, сайтов-визиток, телеграм-ботов под ключ</p>
+    </nav>
+        <div class="greeting-block">
+            <p class="greeting-heading"><b>Привет! Меня зовут Максим и мне 15 лет.</b></p>
+            <span class="greeting-text"><b>Я люблю программировать и знаю такие языки как: HTML, CSS, Python, JavaScript.</b></span>
+        </div>
+    </section>
+    <section class="about-me-block">
+        <div class="about-me-container">
+            <img class="my-photo" src="../static/image/is.jpg" alt="">
+            <div class="about-me-text-container">
+                <span class="about-me-heading">Еще раз привет!</span>
+                <p class="about-me-text">Я Frontend-разработчик и начинающий Fulstack-разработчик. Я живу и учусь в Валдае. 
+                    Я могу сделать вам лендинг или сайт-визитку или же блог. Или мы можем вместе разробатовать совместные проекты.</p>
             </div>
-
-            <div class="bio-section">
-                <h2><i class="fas fa-info-circle"></i> О нас</h2>
-                <p>Мы - команда Valday WEB, специализируемся на создании качественных веб-решений для бизнеса и личного использования: telegram-ботов, сайт-визитки, блоги. Наша команда была основана в 2023 году.</p>
-                
-                <div class="services">
-                    <div class="service">Лендинги</div>
-                    <div class="service">Блоги</div>
-                    <div class="service">Сайты-визитки</div>
-                    <div class="service">Телеграм-боты</div>
-                    <div class="service">Разработка под ключ</div>
+        </div>
+    </section>
+<section class="blog-block">
+    <div class="bg-light">
+        <div class="container py-5">
+            <h2 class="blog-heading">Мой блог:</h2>
+            <div class="recipe-block">
+                {% for post in posts %}
+                <div class="col">
+                    <a class="link-card" href="{{ url_for('view_post', post_id=post.id) }}">
+                        <div class="recipe-card">
+                            <div class="image-container-card">
+                                {% if post.image %}
+                                <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post['title'] }}" class="recipe-img">
+                                {% else %}
+                                <div class="no-image-placeholder">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <div class="featured-content">
+                                <span class="recipe-heading">{{ post['title'] }}</span>
+                                <p class="recipe-text">{{ post['content'] | truncate(300) }}</p>
+                                <span class="read-more">Читать далее →</span>
+                            </div>
+                        </div>
+                    </a>
                 </div>
+                {% endfor %}
             </div>
-
-            <div class="bio-section">
-                <h2><i class="fas fa-user-tie"></i> Основатель</h2>
-                <p>Максим Н. — опытный веб-разработчик и основатель команды Valday WEB. Он создает современные веб-решения и управляет командой.</p>
-            </div>
-        </section>
-
-        <!-- Секция блога -->
-        <section id="blog" class="bio-section">
-            <h2><i class="fas fa-blog"></i> Блог</h2>
-            <p>Последние статьи и новости из мира веб-разработки</p>
-            
-            <div class="blog-posts">
-                <div class="blog-post">
-                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Web Development" class="blog-img">
-                    <div class="blog-info">
-                        <h3 class="blog-title">Тренды веб-разработки в 2023 году</h3>
-                        <p>Обзор самых перспективных технологий и подходов в современной веб-разработке.</p>
-                        <div class="blog-date">15 октября 2023</div>
-                    </div>
-                </div>
-                
-                <div class="blog-post">
-                    <img src="https://images.unsplash.com/photo-1627398242454-45a1465c2479?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Telegram Bots" class="blog-img">
-                    <div class="blog-info">
-                        <h3 class="blog-title">Как создать успешного Telegram-бота</h3>
-                        <p>Пошаговое руководство по созданию и монетизации Telegram-ботов для бизнеса.</p>
-                        <div class="blog-date">8 октября 2023</div>
-                    </div>
-                </div>
-                
-                <div class="blog-post">
-                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Landing Page" class="blog-img">
-                    <div class="blog-info">
-                        <h3 class="blog-title">Секреты эффективных лендингов</h3>
-                        <p>Как создать посадочную страницу, которая действительно конвертирует посетителей в клиентов.</p>
-                        <div class="blog-date">1 октября 2023</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция отзывов -->
-        <section id="reviews" class="bio-section">
-            <h2><i class="fas fa-comments"></i> Отзывы</h2>
-            <p>Что говорят наши клиенты о сотрудничестве с нами</p>
-            
-            <div class="reviews">
-                <div class="review">
-                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Client 1" class="review-avatar">
-                    <div class="review-info">
-                        <h3 class="review-author">Анна К.</h3>
-                        <p class="review-text">"Заказывала сайт-визитку для своего бизнеса. Осталась очень довольна! Сделали быстро, качественно, учли все пожелания. Рекомендую!"</p>
-                        <div class="review-date">12 сентября 2023</div>
-                    </div>
-                </div>
-                
-                <div class="review">
-                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Client 2" class="review-avatar">
-                    <div class="review-info">
-                        <h3 class="review-author">Дмитрий С.</h3>
-                        <p class="review-text">"Нужен был Telegram-бот для автоматизации заказов. Valday WEB справились на отлично! Бот работает без сбоев, клиенты довольны."</p>
-                        <div class="review-date">5 сентября 2023</div>
-                    </div>
-                </div>
-                
-                <div class="review">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Client 3" class="review-avatar">
-                    <div class="review-info">
-                        <h3 class="review-author">Елена М.</h3>
-                        <p class="review-text">"Заказывала лендинг для нового проекта. Ребята из Valday WEB не только сделали красивый дизайн, но и помогли с SEO-оптимизацией. Результат превзошел ожидания!"</p>
-                        <div class="review-date">28 августа 2023</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Секция контактов -->
-        <section id="contacts" class="bio-section">
-            <h2><i class="fas fa-envelope"></i> Контакты</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fab fa-telegram"></i>
-                    <a href="https://t.me/itstNewmax" class="contact-link" target="_blank">@itstNewmax</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:valdayweb@mail.ru" class="contact-link">valdayweb@mail.ru</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="social-links">
-            <a href="https://t.me/itstNewmax" class="social-link" target="_blank"><i class="fab fa-telegram"></i></a>
-            <a href="mailto:valdayweb@mail.ru" class="social-link"><i class="fas fa-envelope"></i></a>
         </div>
     </div>
-
-    <div class="music-player">
-        <div class="music-btn pulse" id="playBtn">
-            <i class="fas fa-play"></i>
-        </div>
-        <div class="music-info">
-            Сейчас играет: Chill Lo-Fi
-        </div>
-        <div class="volume-control">
-            <i class="fas fa-volume-down volume-icon"></i>
-            <input type="range" min="0" max="100" value="10" class="volume-slider" id="volumeSlider">
-        </div>
-    </div>
-
-    <!-- Музыкальный элемент -->
-    <audio id="backgroundMusic" loop>
-        <source src="JS_aka_The_Best_-_Lo-Fi_Chill_77429444.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает аудио элементы.
-    </audio>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const audio = document.getElementById('backgroundMusic');
-            const playBtn = document.getElementById('playBtn');
-            const playIcon = playBtn.querySelector('i');
-            const volumeSlider = document.getElementById('volumeSlider');
-            const navLinks = document.getElementById('navLinks');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const header = document.getElementById('mainHeader');
-            
-            let isPlaying = false;
-            
-            // Устанавливаем начальную громкость (30%)
-            audio.volume = 0.1;
-            
-            // Обновляем громкость при изменении ползунка
-            volumeSlider.addEventListener('input', function() {
-                audio.volume = this.value / 100;
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</section>
+<div class="container-block">
+    <footer>
+            <div class="footer-wave"></div>
+            <div class="footer-container">
+                <div class="footer-contact">
+                    <h3>Контакты</h3>
+                    <ul class="footer_list">
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <span class="footer_text">maximnvs@bk.ru</span>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <a class="footer_link" href="https://t.me/ItsNewmax" target="_blank">@ItsNewmax</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fas fa-comment"></i>
+                            </div>
+                            <a class="footer_link" href="https://tenchat.ru/ItsNewmax?utm_source=c1f5ccba-7d26-4055-8279-07f7b187279b" target="_blank">ItsNewmax</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <a class="footer_link" href="#">YouTube: скоро будет :/</a>
+                        </li>
+                        <li class="footer_item">
+                            <div class="footer-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <a class="footer_link" href="https://www.instagram.com/novmaxiz?igsh=cTV5eW9zeHRpMXJs" target="_blank">novmaxiz</a>
+                        </li>
+                    </ul>
+                </div>
                 
-                // Обновляем иконку громкости
-                const volumeIcon = document.querySelector('.volume-icon');
-                if (this.value == 0) {
-                    volumeIcon.className = 'fas fa-volume-mute volume-icon';
-                } else if (this.value < 50) {
-                    volumeIcon.className = 'fas fa-volume-down volume-icon';
-                } else {
-                    volumeIcon.className = 'fas fa-volume-up volume-icon';
-                }
-            });
+                <div class="footer-social">
+                    <h3>Социальные сети</h3>
+                    <p>Подписывайтесь на мои соцсети, чтобы быть в курсе новых проектов и обновлений.</p>
+                    <div class="social-icons">
+                        <a href="https://t.me/ItsNewmax" class="social-icon" target="_blank">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="https://vk.com/max__new" class="social-icon" target="_blank">
+                            <i class="fab fa-vk"></i>
+                        </a>
+                        <a href="https://tenchat.ru/ItsNewmax?utm_source=c1f5ccba-7d26-4055-8279-07f7b187279b" class="social-icon" target="_blank">
+                            <i class="fas fa-comment"></i>
+                        </a>
+                        <a href="#" class="social-icon">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
             
-            // Показать шапку с анимацией
-            setTimeout(() => {
-                header.classList.add('visible');
-            }, 300);
-            
-            // Изменение шапки при скролле
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
-                } else {
-                    header.classList.remove('scrolled');
-                }
-            });
-            
-            // Автовоспроизведение с взаимодействием пользователя
-            document.body.addEventListener('click', function() {
-                if (!isPlaying) {
-                    audio.play().then(() => {
-                        isPlaying = true;
-                        playIcon.classList.remove('fa-play');
-                        playIcon.classList.add('fa-pause');
-                        playBtn.classList.remove('pulse');
-                    }).catch(error => {
-                        console.log("Автовоспроизведение заблокировано");
-                    });
-                }
-            }, { once: true });
-            
-            playBtn.addEventListener('click', function() {
-                if (isPlaying) {
-                    audio.pause();
-                    playIcon.classList.remove('fa-pause');
-                    playIcon.classList.add('fa-play');
-                    playBtn.classList.add('pulse');
-                } else {
-                    audio.play();
-                    playIcon.classList.remove('fa-play');
-                    playIcon.classList.add('fa-pause');
-                    playBtn.classList.remove('pulse');
-                }
-                isPlaying = !isPlaying;
-            });
-            
-            // Мобильное меню
-            mobileMenuBtn.addEventListener('click', function() {
-                navLinks.classList.toggle('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-            
-            // Плавная прокрутка к якорям
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        // Закрываем мобильное меню если открыто
-                        if (navLinks.classList.contains('active')) {
-                            navLinks.classList.remove('active');
-                            const icon = mobileMenuBtn.querySelector('i');
-                            icon.classList.remove('fa-times');
-                            icon.classList.add('fa-bars');
-                        }
-                        
-                        // Плавная прокрутка
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Создание частиц для фона
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 30;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Случайный размер
-                const size = Math.random() * 5 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Случайная позиция
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                
-                // Случайная задержка анимации
-                particle.style.animationDelay = `${Math.random() * 15}s`;
-                
-                particlesContainer.appendChild(particle);
+            <div class="footer-bottom">
+                <p>&copy; 2024 Новоселецкий Максим. Все права защищены.</p>
+            </div>
+    </footer>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                navbar.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+                navbar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.backgroundColor = 'transparent';
+                navbar.style.boxShadow = 'none';
             }
         });
-    </script>
-</body>
-</html>
-</body>
-</html>
+    });
+</script>
+{% endblock %}
